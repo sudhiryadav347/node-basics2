@@ -20,7 +20,7 @@ const server = http.createServer((req, res) => {
             console.log('chunk', chunk);
             body.push(chunk);           
         });
-        req.on("end", () => {
+        return req.on("end", () => {
             const parsedBody = Buffer.concat(body).toString();
             console.log('parsedBody', parsedBody);
             const message = parsedBody.split('=')[1];
