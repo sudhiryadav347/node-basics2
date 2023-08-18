@@ -1,23 +1,22 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const ejs = require('ejs');
+import express from 'express';
+import ejs from 'ejs';
 const app = express();
-const path = require('path');
+import { join } from 'path';
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
-const adminRoutes = require('./routes/admin');
-const shopRoutes = require('./routes/shop');
-const errorController = require('./controllers/error');
+import adminRoutes from './routes/admin.js';
+import shopRoutes from './routes/shop.js';
+import { get404Page } from './controllers/error.js';
 
-app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+app.use(express.urlencoded({extended: true})); // for parsing application/x-www-form-urlencoded
 //Make public folder statically served.
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('public'));
 app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 
 //Handle 404
-app.use(errorController.get404Page);
+app.use(get404Page);
 
 app.listen(3002);
