@@ -1,13 +1,11 @@
-const path = require('path');
+import { Router } from 'express';
 
-const express = require('express');
+const router = Router();
 
-const router = express.Router();
+import { getAddProducts, postAddProducts } from '../controllers/products.js';
 
-const productsController = require('../controllers/products');
+router.get('/add-product', getAddProducts);
 
-router.get('/add-product', productsController.getAddProducts);
+router.post('/add-product', postAddProducts);
 
-router.post('/add-product', productsController.postAddProducts);
-
-module.exports = router;
+export default router;

@@ -1,6 +1,6 @@
-const Product = require('../Models/product');
+import Product from '../Models/product.js';
 
-exports.getAddProducts = (req, res, next) => {
+export function getAddProducts(req, res, next) {
 	res.render('add-product', {
 		pageTitle: 'Add Product',
 		path: '/admin/add-product',
@@ -8,15 +8,15 @@ exports.getAddProducts = (req, res, next) => {
 		productCSS: true,
 		activeAddProduct: true,
 	});
-};
+}
 
-exports.postAddProducts = (req, res, next) => {
+export function postAddProducts(req, res, next) {
 	const product = new Product(req.body.title);
 	product.save();
 	res.redirect('/');
-};
+}
 
-exports.getProducts = (req, res, next) => {
+export function getProducts(req, res, next) {
 	const products = Product.fetchAll();
 	res.render('shop', {
 		prods: products,
@@ -26,4 +26,4 @@ exports.getProducts = (req, res, next) => {
 		activeShop: true,
 		productCSS: true,
 	});
-};
+}

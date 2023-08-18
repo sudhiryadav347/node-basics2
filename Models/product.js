@@ -1,6 +1,6 @@
 const products = [];
 
-module.exports = class Product {
+export default class Product {
 	constructor(value) {
 		this.title = value;
 	}
