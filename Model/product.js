@@ -11,7 +11,8 @@ export default class Product {
 		fs.readFile(p, (err, fileContent) => {
 			let products = [];
 			if (!err) {
-				products = JSON.parse(fileContent);
+				//if the products.json file is empty
+				products = (fileContent.length == 0) ? [] : JSON.parse(fileContent);
 			}
 			products.push(this);
 			fs.writeFile(p, JSON.stringify(products), (err) => {
