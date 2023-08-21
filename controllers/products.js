@@ -1,4 +1,4 @@
-import Product from '../Models/product.js';
+import Product from '../Model/product.js';
 
 export function getAddProducts(req, res, next) {
 	res.render('add-product', {
