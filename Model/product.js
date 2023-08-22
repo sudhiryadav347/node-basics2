@@ -1,5 +1,6 @@
 import * as path from 'path';
 import * as fs from 'fs';
+import { pathToDataFile } from '../util/rootpath.js';
 
 export default class Product {
 	constructor(value) {
@@ -7,15 +8,14 @@ export default class Product {
 	}
 
 	save() {
-		const p = path.join(process.cwd(), 'data', 'products.json');
-		fs.readFile(p, (err, fileContent) => {
+		fs.readFile(pathToDataFile(), (err, fileContent) => {
 			let products = [];
 			if (!err) {
 				//if the products.json file is empty
-				products = (fileContent.length == 0) ? [] : JSON.parse(fileContent);
+				products = fileContent.length == 0 ? [] : JSON.parse(fileContent);
 			}
 			products.push(this);
-			fs.writeFile(p, JSON.stringify(products), (err) => {
+			fs.writeFile(pathToDataFile(), JSON.stringify(products), (err) => {
 				console.log(err);
 			});
 		});
