@@ -21,7 +21,12 @@ export default class Product {
 		});
 	}
 
-	static fetchAll() {
-		// return products;
+	static fetchAll(cb) {
+		fs.readFile(pathToDataFile(), (err, fileContent) => {
+			if (err) {
+				cb([]);
+			}
+				cb(JSON.parse(fileContent));
+		});
 	}
 }
