@@ -105,3 +105,4 @@ dist
 
 # Server generated file
 message.txt
+data/products.json
