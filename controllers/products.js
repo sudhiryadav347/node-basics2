@@ -1,4 +1,4 @@
-import Product from '../Models/product.js';
+import Product from '../Model/product.js';
 
 export function getAddProducts(req, res, next) {
 	res.render('add-product', {
@@ -17,13 +17,15 @@ export function postAddProducts(req, res, next) {
 }
 
 export function getProducts(req, res, next) {
-	const products = Product.fetchAll();
-	res.render('shop', {
-		prods: products,
-		pageTitle: 'Shop',
-		path: '/',
-		hasProducts: products.length > 0,
-		activeShop: true,
-		productCSS: true,
+	Product.fetchAll( products => {
+		res.render('shop', {
+			prods: products,
+			pageTitle: 'Shop',
+			path: '/',
+			hasProducts: products.length > 0,
+			activeShop: true,
+			productCSS: true,
+		});
 	});
+	
 }
